@@ -1,17 +1,12 @@
-import { Grid, OrbitControls } from '@react-three/drei'
-import { Canvas, ThreeElements, useFrame } from '@react-three/fiber'
-
 import { animated, useSpring } from '@react-spring/three'
-import { MeshDistortMaterial } from '@react-three/drei'
-import React, { StrictMode, useEffect, useMemo, useRef, useState } from 'react'
+import type { ThreeElements } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
+import { StrictMode, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import * as THREE from 'three'
-import { CSG } from 'three-csg-ts'
 
 import './index.css'
 import './styles.css'
-
-const AnimatedMeshDistortMaterial = animated(MeshDistortMaterial)
 
 function HollowHemisphere(props: ThreeElements['group'] & { opened: boolean, onClick: () => void }) {
   const springs = useSpring({
