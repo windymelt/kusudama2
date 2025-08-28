@@ -6,9 +6,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import './styles.css'
 import { HollowHemisphere } from './HollowSemiSphere';
-
-type Vec3 = [number, number, number];
-
+import type { Vec3 } from './types';
+import { Confetti } from './Confetti';
 
 export function Kusudama() {
     const [clicked, setClicked] = useState(false)
@@ -26,6 +25,11 @@ export function Kusudama() {
                 <HollowHemisphere position={[0, -1, 0]} rotation={[0, 0, -Math.PI / 2]} opened={clicked} onClick={() => setClicked(!clicked)} />
             </animated.group>
         </group>
+        <Confetti active={clicked} pos={[0,1,0]} vel={[0,-0.03,0]} rot={[0.1,0.1,0.1]} />
+        <Confetti active={clicked} pos={[0,1,0]} vel={[0,-0.03,0]} rot={[0.1,0.1,0.1]} />
+        <Confetti active={clicked} pos={[0,1,0]} vel={[0,-0.03,0]} rot={[0.1,0.1,0.1]} />
+        <Confetti active={clicked} pos={[0,1,0]} vel={[0,-0.03,0]} rot={[0.1,0.1,0.1]} />
+        <Confetti active={clicked} pos={[0,1,0]} vel={[0,-0.03,0]} rot={[0.1,0.1,0.1]} />
     </>
   );
 }
