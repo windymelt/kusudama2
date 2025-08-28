@@ -8,6 +8,7 @@ type ConfettiProps = {
     pos: Vec3;
     vel: Vec3;
     rot: Vec3;
+    color: string;
 }
 
 function rnorm(): number {
@@ -32,16 +33,20 @@ export function Confetti(props: ConfettiProps) {
         vel.current[1] += rnorm() / 100 - 0.001;
         vel.current[2] += rnorm() / 100;
 
+        rot.current[0] = (rot.current[0] + rnorm() / 10) % (2 * Math.PI);
+        rot.current[1] = (rot.current[1] + rnorm() / 10) % (2 * Math.PI);
+        rot.current[2] = (rot.current[2] + rnorm() / 10) % (2 * Math.PI);
+
         if (meshRef.current) {
             meshRef.current.position.set(...pos.current);
             meshRef.current.rotation.set(...rot.current);
         }
     });
-    
+
     return (
         <mesh ref={meshRef} position={pos.current} rotation={rot.current}>
             <planeGeometry args={[0.1, 0.2]} />
-            <meshStandardMaterial color={'red'} />
+            <meshStandardMaterial color={props.color} />
         </mesh>
     );
 }
