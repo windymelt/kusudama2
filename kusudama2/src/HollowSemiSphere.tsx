@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { animated, useSpring } from '@react-spring/three'
 import type { ThreeElements } from '@react-three/fiber'
 import { useRef } from 'react'
 
@@ -9,9 +8,7 @@ type HollowHemisphereProps = ThreeElements['group'] & {
 }
 
 export function HollowHemisphere(props: HollowHemisphereProps) {
-  const springs = useSpring({
-    color: props.opened ? '#ffc859' : '#ffc859',
-  })
+  const color = '#ffc859';
   const groupRef = useRef<THREE.Mesh>(null!)
   //useFrame((state, delta) => (groupRef.current.rotation.z += delta))
 
@@ -24,19 +21,19 @@ export function HollowHemisphere(props: HollowHemisphereProps) {
       {/* 外側半球（表面） */}
       <mesh castShadow receiveShadow onClick={props.onClick}>
         <sphereGeometry args={[R, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <animated.meshStandardMaterial color={springs.color} side={THREE.FrontSide} />
+        <meshStandardMaterial color={color} side={THREE.FrontSide} metalness={0.7} />
       </mesh>
 
       {/* 内側半球（裏面を描画） */}
       <mesh castShadow receiveShadow>
         <sphereGeometry args={[r, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <animated.meshStandardMaterial color={springs.color} side={THREE.BackSide} />
+        <meshStandardMaterial color={color} side={THREE.BackSide} metalness={0.7} />
       </mesh>
 
       {/* 切断面の肉（リングで塞ぐ） */}
       <mesh rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
         <ringGeometry args={[r, R, 128]} />
-        <animated.meshStandardMaterial color={springs.color} side={THREE.DoubleSide} />
+        <meshStandardMaterial color={color} side={THREE.DoubleSide} metalness={0.7} />
       </mesh>
     </group>
   )

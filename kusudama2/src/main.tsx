@@ -8,6 +8,7 @@ import './styles.css'
 import { HollowHemisphere } from './HollowSemiSphere';
 import type { Vec3 } from './types';
 import { Confetti } from './Confetti';
+import { TextConfetti } from './TextConfetti';
 
 export function Kusudama() {
     const [clicked, setClicked] = useState(false)
@@ -32,9 +33,10 @@ export function Kusudama() {
                     <HollowHemisphere position={[0, -1, 0]} rotation={[0, 0, -Math.PI / 2]} opened={clicked} onClick={() => setClicked(!clicked)} />
                 </animated.group>
             </group>
-            {confettis.map((c) => {
-                return (<Confetti active={clicked} pos={[0, 1, 0]} vel={[0, -0.03, 0]} rot={[0.1, 0.1, 0.1]} color={c.color} />)
+            {confettis.map((c, idx) => {
+                return (<Confetti key={idx} active={clicked} pos={[0, 1, 0]} vel={[0, -0.03, 0]} rot={[0.1, 0.1, 0.1]} color={c.color} />)
             })}
+            <TextConfetti active={clicked}  pos={[0, 1, 0]} vel={[0, -0.03, 0]} rot={[0.1, 0.1, 0.1]} color='#00ff00' text='windymelt/kusudama2' clickHandler={() => window.open("https://github.com/windymelt/kusudama2", "_blank")} />
         </>
     );
 }
